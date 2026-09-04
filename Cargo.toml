@@ -1,0 +1,69 @@
+[package]
+name = "payam-resan-examples"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "Runnable examples for the Payam Resan SMS web service"
+license = "MIT"
+
+# One dependency, and only because Rust has neither an HTTP client nor a JSON
+# parser in its standard library. The `json` feature makes ureq re-export
+# serde_json, so `ureq::json!` and `ureq::serde_json::Value` come from the same
+# crate and Cargo.toml stays at a single line.
+#
+# ureq is blocking on purpose. reqwest would drag in an async runtime, and an
+# example that opens with `#[tokio::main]` teaches the runtime before it teaches
+# the API.
+[dependencies]
+ureq = { version = "2", features = ["json"] }
+
+# Cargo only discovers examples directly under examples/. These live one level
+# down, in examples/v3/, because the version is a folder here as it is in every
+# other language repository, so each one is declared by hand.
+#
+# The names are the documentation page slugs, which is what ties a file to its
+# page on docs.payam-resan.com. Do not rename them.
+
+[[example]]
+name = "account-info"
+path = "examples/v3/account-info.rs"
+
+[[example]]
+name = "send"
+path = "examples/v3/send.rs"
+
+[[example]]
+name = "send-bulk"
+path = "examples/v3/send-bulk.rs"
+
+[[example]]
+name = "send-multiple"
+path = "examples/v3/send-multiple.rs"
+
+[[example]]
+name = "token-list"
+path = "examples/v3/token-list.rs"
+
+[[example]]
+name = "send-token-single"
+path = "examples/v3/send-token-single.rs"
+
+[[example]]
+name = "send-token-single-get"
+path = "examples/v3/send-token-single-get.rs"
+
+[[example]]
+name = "send-token-multi"
+path = "examples/v3/send-token-multi.rs"
+
+[[example]]
+name = "status-by-id"
+path = "examples/v3/status-by-id.rs"
+
+[[example]]
+name = "status-by-user-trace-id"
+path = "examples/v3/status-by-user-trace-id.rs"
+
+[[example]]
+name = "get-inbox"
+path = "examples/v3/get-inbox.rs"
